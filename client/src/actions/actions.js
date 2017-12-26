@@ -11,7 +11,7 @@ const localhost = 'http://localhost:'
 const port = '3001'
 const getAllEndpoint = '/getAll'
 const addItemEndpoint = '/addItem'
-let nextId = 2
+
 
 //modals
 export function showModal() {
@@ -32,17 +32,7 @@ export function setPreview(preview) {
     }
 }
 
-export function addItem1(description, src, lft, rgt) {
-    return {
-        type: ADD_ITEM,
-        id: nextId++,
-        description: description,
-        src,
-        lft,
-        rgt
-    }
-}
-
+//________________Deleting Item______________________
 export function removeItem(id) {
     return {
         type: REMOVE_ITEM,
@@ -55,44 +45,40 @@ export function deleteItem(id){
         .then(res=> {
             console.log(res)
             dispatch(removeItem(id))
+            dispatch(itemsFetchAll())
         })
     }
 }
-//____________________________________________________________________
+//_____________________Adding Item_______________________________________
 
 export function addItem(item) {
     return {
         type: ADD_ITEM,
-        // id: item.Id,
-        // description: item.description,
-        // src: item.src,
-        // lft: item.lft,
-        // rgt:item.rgt
         item
     }
 }
-//speaking with server
+
 export function createItem(item) {
     item = JSON.stringify({
         Description: item.desc,
-        Src: item.src,
-        Id: item.id
+        Src: item.src
     })
     return (dispatch) => {
         axios.post((localhost + port + addItemEndpoint), item)
             .then(response => {
                 console.log(item)
-                let itemm = JSON.parse(item)
-                console.log(itemm)
-                dispatch(addItem(itemm))
+                let _item = JSON.parse(item)
+                console.log(_item)
+                dispatch(addItem(_item))
+                dispatch(itemsFetchAll())
             })
         dispatch(hideModal())
     }
 }
-
+//__________________Fetch all items from server_________________________
 export function itemsFetchData(items) {
     return {
-        type: 'ITEMS_FETCH_DATA',
+        type: FETCH_ITEMS,
         items
     };
 }
@@ -110,3 +96,13 @@ export function itemsFetchAll() {
     };
 }
 
+// export function addItem(description, src, lft, rgt) {
+//     return {
+//         type: ADD_ITEM,
+//         id: nextId++,
+//         description: description,
+//         src,
+//         lft,
+//         rgt
+//     }
+// }
