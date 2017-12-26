@@ -13,7 +13,6 @@ export default class Root extends Component {
       <Provider store={store}>
         <App />
       </Provider>
-     // <ItemItem/>
     )
   }
 }

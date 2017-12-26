@@ -6,10 +6,15 @@ class ItemList extends Component {
    
     render() {
         let { items, showModalPlusClicked, deleteItem } = this.props
-        let iitems = items
+        // let _items = []
+        // if(items.items != null){
+        //     _items = items.items
+        // }
+       let _items = items
+      console.log("Items",_items)
         return (
             <div >
-                {iitems.map((item) =>
+                {_items.map((item) =>
                     <Item
                         key={item.Id}
                         item={item}
