@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_ITEM, REMOVE_ITEM, SHOW_MODAL, HIDE_MODAL, SET_PREVIEW, FETCH_ITEMS } from '../actions/actions'
+import { ADD_ITEM, REMOVE_ITEM, SHOW_MODAL, HIDE_MODAL, SET_PREVIEW, FETCH_ITEMS, ITEM_CLICKED } from '../actions/actions'
 
 function preview(state = {}, action) {
     switch (action.type) {
@@ -45,7 +45,17 @@ let initItems = {
     ]
 }
 
-
+//get ID of item on which '+' was clicked
+export function itemClicked(state = {}, action) {
+    switch (action.type) {
+        case ITEM_CLICKED: 
+        return Object.assign({}, state, 
+             action.item
+        )
+        default:
+            return state
+    }
+}
 
 export function fetchItems(state = [], action) {
     switch (action.type) {
@@ -65,7 +75,8 @@ export function fetchItems(state = [], action) {
 export default combineReducers({
     modalWindows,
     fetchItems,
-    preview
+    preview,
+    itemClicked
 })
 
 // function addRemoveItem(state = initItems, action) {

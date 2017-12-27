@@ -89,6 +89,7 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 
 var items ItemList
 
+//
 func RepoCreateItem(item Item) Item {
 	//db.Exec("UPDATE new_table SET rgt = rgt + 2, lft = IF(lft > $rgt, lft + 2, lft) WHERE rgt >= $rgt")
 	items.ItemList = append(items.ItemList, item)
@@ -115,6 +116,7 @@ func addItem(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 	}
+
 	item = RepoCreateItem(item)
 	db.Exec("INSERT INTO new_table (description, src, lft, rgt) VALUES( ?, ?, ?, ?)", item.Description, item.Src, item.Lft, item.Rgt)
 	if err != nil {

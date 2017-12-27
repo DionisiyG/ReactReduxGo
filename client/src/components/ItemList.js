@@ -11,7 +11,7 @@ class ItemList extends Component {
         //     _items = items.items
         // }
        let _items = items
-      console.log("Items",_items)
+     // console.log("Items",_items)
         return (
             <div >
                 {_items.map((item) =>

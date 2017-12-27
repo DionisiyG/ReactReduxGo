@@ -8,9 +8,12 @@ class ModalWindow extends Component {
         this.props.setPreview(preview)
     }
     getSrcDescOfItem(e) {
-        let item ={
+        let itemClicked = this.props.itemClicked
+        let item = {
             desc : this.getDesc.value,
-            src : this.props.preview
+            src : this.props.preview,
+            lft: itemClicked.Rgt,
+            rgt: itemClicked.Rgt + 1
         }
         // let desc = this.getDesc.value
         // // let src = this.getImgSrc.currentSrc

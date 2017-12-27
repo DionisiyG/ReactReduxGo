@@ -13,7 +13,7 @@ class Item extends Component {
                         <img src={item.Src} alt="" />
                         {"Description: " + item.Description}
                         <div className="buttons">
-                            <button className="addBtn btn" onClick={() => showModalPlusClicked()}>+</button>
+                            <button className="addBtn btn" onClick={(id) => showModalPlusClicked(item)}>+</button>
                             <button className="removeBtn btn" onClick={(id) => deleteItem(item.Id)}>-</button>
                         </div>
                         <p>lKey is {item.Lft}</p>
