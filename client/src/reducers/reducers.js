@@ -63,7 +63,6 @@ export function fetchItems(state = [], action) {
 
 
 export default combineReducers({
-    // addRemoveItem,
     modalWindows,
     fetchItems,
     preview

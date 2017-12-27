@@ -59,8 +59,10 @@ export function addItem(item) {
 }
 
 export function createItem(item) {
+
     item = JSON.stringify({
         Description: item.desc,
+        // Src: item.src.replace("blob:", "")
         Src: item.src
     })
     return (dispatch) => {
