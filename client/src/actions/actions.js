@@ -21,16 +21,16 @@ export function showModal() {
     }
 }
 
-export function showModalWhatItemWasClicked(item){
+export function showModalWhatItemWasClicked(item) {
     return dispatch => {
         dispatch(showModal())
         dispatch(whatItemWasClicked(item))
     }
 }
 
-export function whatItemWasClicked(item){
-    return{
-        type:'ITEM_CLICKED',
+export function whatItemWasClicked(item) {
+    return {
+        type: 'ITEM_CLICKED',
         item
     }
 }
@@ -65,11 +65,13 @@ export function createItem(item) {
         Rgt: item.rgt
     })
     return (dispatch) => {
+       // dispatch(itemsFetchAll())
         axios.post((localhost + port + addItemEndpoint), item)
             .then(response => {
                 //console.log(item)
                 let _item = JSON.parse(item)
                 //console.log(_item)
+                // dispatch(itemsFetchAll())
                 dispatch(addItem(_item))
                 dispatch(itemsFetchAll())
             })
@@ -84,12 +86,12 @@ export function itemsFetchData(items) {
     };
 }
 
-export function itemsFetchAll() {
+export function itemsFetchAll(items) {
     return (dispatch) => {
         axios.get(localhost + port + getAllEndpoint)
             .then((response => {
                 let items = response.data.ItemList
-                if(items===null){
+                if (items === null) {
                     items = []
                 }
                 dispatch(itemsFetchData(items))
@@ -103,14 +105,14 @@ export function removeItem(id) {
         id
     }
 }
-export function deleteItem(id){
-    return dispatch =>{
-        axios.delete(localhost+port+"/deleteItem?id="+id)
-        .then(res=> {
-            console.log(res)
-            dispatch(removeItem(id))
-            dispatch(itemsFetchAll())
-        })
+export function deleteItem(id) {
+    return dispatch => {
+        axios.delete(localhost + port + "/deleteItem?id=" + id)
+            .then(res => {
+                console.log(res)
+                dispatch(removeItem(id))
+                dispatch(itemsFetchAll())
+            })
     }
 }
 

@@ -55,11 +55,47 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// rows, err := db.Query("SELECT * FROM new_table ORDER BY id")
+	// if err != nil {
+	// 	http.Error(w, http.StatusText(500), 500)
+	// 	return
+	// }
+	// defer rows.Close()
+
+	// var items ItemList
+
+	// for rows.Next() {
+	// 	var id int
+	// 	var description string
+	// 	var src string
+	// 	var lft int
+	// 	var rgt int
+
+	// 	err = rows.Scan(&id, &description, &src, &lft, &rgt)
+	// 	if err != nil {
+	// 		http.Error(w, http.StatusText(500), 500)
+	// 		return
+	// 	}
+	// 	items.ItemList = append(items.ItemList, Item{Id: id, Description: description, Src: src, Lft: lft, Rgt: rgt})
+	// }
+	//fmt.Println(items, "\n")
+	//all magick where to change lft and rgt think should be here
+
+	// b, err := json.Marshal(items)
+
+	//fmt.Println(getAllItems())
+
+	b, err := json.Marshal(getAllItems())
+	checkErr(err)
+
+	enableCors(&w)
+	//json.NewEncoder(w).Encode(items.ItemList)
+	w.Write(b)
+}
+
+func getAllItems() ItemList {
 	rows, err := db.Query("SELECT * FROM new_table ORDER BY id")
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
-		return
-	}
+	checkErr(err)
 	defer rows.Close()
 
 	var items ItemList
@@ -72,26 +108,40 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 		var rgt int
 
 		err = rows.Scan(&id, &description, &src, &lft, &rgt)
-		if err != nil {
-			http.Error(w, http.StatusText(500), 500)
-			return
-		}
 
 		items.ItemList = append(items.ItemList, Item{Id: id, Description: description, Src: src, Lft: lft, Rgt: rgt})
 	}
+	return items
 
-	b, err := json.Marshal(items)
-	checkErr(err)
+}
 
-	enableCors(&w)
-	w.Write(b)
+func updateKeys(items ItemList) ItemList {
+	var lastItem = items.ItemList[len(items.ItemList)-1]
+	var lastItemLKey = lastItem.Lft
+	var lastItemRKey = lastItem.Rgt
+	fmt.Println("Last item of a slice is:", lastItem, "Lkey is", lastItemLKey, "Rkey is", lastItemRKey)
+
+	if len(items.ItemList) > 1 {
+		for _, item := range items.ItemList {
+			if item.Lft == lastItemLKey && item.Rgt == lastItemRKey {
+				fmt.Println("This is added item")
+				break
+			}
+			if item.Lft >= lastItemLKey {
+				db.Exec("UPDATE new_table SET lft = lft + 2 WHERE id = ?", item.Id)
+			}
+			if item.Rgt >= lastItemLKey {
+				db.Exec("UPDATE new_table SET rgt = rgt + 2 WHERE id = ?", item.Id)
+			}
+
+		}
+	}
+	return items
 }
 
 var items ItemList
 
-//
 func RepoCreateItem(item Item) Item {
-	//db.Exec("UPDATE new_table SET rgt = rgt + 2, lft = IF(lft > $rgt, lft + 2, lft) WHERE rgt >= $rgt")
 	items.ItemList = append(items.ItemList, item)
 	return item
 }
@@ -123,7 +173,8 @@ func addItem(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(500), 500)
 		return
 	}
-
+	var items = getAllItems()
+	updateKeys(items)
 	w.WriteHeader(http.StatusCreated)
 }
 
