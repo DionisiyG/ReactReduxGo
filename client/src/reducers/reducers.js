@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_ITEM, REMOVE_ITEM, SHOW_MODAL, HIDE_MODAL, SET_PREVIEW, FETCH_ITEMS, ITEM_CLICKED, itemsFetchData } from '../actions/actions'
+import { ADD_ITEM, REMOVE_ITEM, SHOW_MODAL, HIDE_MODAL, SET_PREVIEW, FETCH_ITEMS, ITEM_CLICKED, HIDE_ADD_BUTTON } from '../actions/actions'
 
 function preview(state = {}, action) {
     switch (action.type) {
@@ -74,11 +74,23 @@ export function operateWithItems(state = [], action) {
     }
 }
 
+function hideAddButton(state = {}, action) {
+    switch (action.type) {
+      case HIDE_ADD_BUTTON:
+        return Object.assign({}, state, {
+          isShowing: false
+        })
+      default:
+        return state
+    }
+  }
+
 export default combineReducers({
     modalWindows,
     operateWithItems,
     preview,
-    itemClicked
+    itemClicked,
+    hideAddButton
 })
 
 // function addRemoveItem(state = initItems, action) {

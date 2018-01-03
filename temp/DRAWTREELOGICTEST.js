@@ -38,51 +38,38 @@ function createTree(node, ul, arr) {
 
 function init(){
   var node = document.getElementById('tree');
-  var data = [{
-    title: "Одежда",
-    left: 1,
-    right: 22
-  }, {
-    title: "Мужская",
-    left: 2,
-    right: 9
-  }, {
-    title: "Женская",
-    left: 10,
-    right: 21
-  }, {
-    title: "Костюмы",
-    left: 3,
-    right: 8
-  }, {
-    title: "Платья",
-    left: 11,
-    right: 16
-  }, {
-    title: "Юбки",
-    left: 17,
-    right: 18
-  }, {
-    title: "Блузы",
-    left: 19,
-    right: 20
-  }, {
-    title: "Брюки",
-    left: 4,
-    right: 5
-  }, {
-    title: "Жакеты",
-    left: 6,
-    right: 7
-  }, {
-    title: "Вечерние",
-    left: 12,
-    right: 13
-  }, {
-    title: "Летние",
-    left: 14,
-    right: 15
-  }];
+  var data = [
+    {
+      description: "aasdas0",
+      lft: 0,
+      rgt: 11
+    },
+    {
+      description: "aasdas1",
+      lft: 1,
+      rgt: 2
+    },
+    {
+      description: "aasdas2",
+      lft: 3,
+      rgt: 10
+    },
+    {
+      description: "aasdas2-1",
+      lft: 4,
+      rgt: 9
+    },
+    {
+      description: "aasdas2-1-1",
+      lft: 5,
+      rgt: 6
+    },
+    {
+      description: "aasdas2-1-2",
+      lft: 7,
+      rgt: 8
+    },
+  ];
   drawNestedSetsTree(data, node);
 }
 
@@ -95,19 +82,19 @@ function drawNestedSetsTree(data, node) {
     node.appendChild(tree);
   }
 
-  function fetchChildElement(container, left, right) {
+  function fetchChildElement(container, lft, rgt) {
     data.filter(filterItems); //go through data array
     return container;
 
     function filterItems(item) {
-      if (item.left === (left || 1)) {
+      if (item.lft === (lft || 0)) {
         var element = document.createElement('li');
-        element.innerHTML = item.title;
+        element.innerHTML = item.description;
 
         //check if element got nested elements, if true - call function again
-        if (item.left + 1 < item.right) {
+        if (item.lft + 1 < item.rgt) {
           var childContainer = document.createElement('ul');
-          var child = fetchChildElement(childContainer, item.left + 1, item.right - 1);
+          var child = fetchChildElement(childContainer, item.lft + 1, item.rgt - 1);
           element.appendChild(child);
         }
 
@@ -115,8 +102,8 @@ function drawNestedSetsTree(data, node) {
         container.appendChild(element);
 
         //check if next element exists and call function for them
-        if (right && item.right < right) {
-          fetchChildElement(container, item.right + 1, right);
+        if (rgt && item.rgt < lft) {
+          fetchChildElement(container, item.rgt + 1, rgt);
         }
       }
     }

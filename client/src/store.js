@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
 import reducer from './reducers/reducers'
-import axios from 'axios'
+//import axios from 'axios'
 
 // let items = axios.get('http://localhost:3001/getAll')
 //   .then((response => {
@@ -14,25 +14,26 @@ import axios from 'axios'
 //     // console.log('preloaded state', items)
 //   }))
 
-function getTest() {
-  return axios.get('http://localhost:3001/getAll')
-}
+// function getTest() {
+//   return axios.get('http://localhost:3001/getAll')
+// }
 
-function getitems() {
-  return axios.get('http://localhost:3001/getAll')
-    .then((response => {
-      let items = response.data.ItemList
-      if (items === null) {
-        items = []
-      }
-      return items
-    }))
-}
+// function getitems() {
+//   return axios.get('http://localhost:3001/getAll')
+//     .then((response => {
+//       let items = response.data.ItemList
+//       if (items === null) {
+//         items = []
+//       }
+//       return items
+//     }))
+// }
 
 
 
 const initialState = {
   modalWindows: { isShowing: false },
+  hideAddButton: {isShowing: true}
   // fetchItems: []
   // fetchItems: [
   //     {
@@ -54,5 +55,5 @@ const initialState = {
 
 const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware));
 const store = createStore(reducer, initialState, middleware)
-console.log(store.getState())
+//console.log(store.getState())
 export default store;

@@ -7,6 +7,7 @@ export const HIDE_MODAL = 'HIDE_MODAL'
 export const SET_PREVIEW = 'SET_PREVIEW'
 export const FETCH_ITEMS = 'FETCH_ITEMS'
 export const ITEM_CLICKED = 'ITEM_CLICKED'
+export const HIDE_ADD_BUTTON= 'HIDE_ADD_BUTTON'
 
 const localhost = 'http://localhost:'
 const port = '3001'
@@ -25,6 +26,7 @@ export function showModal() {
 export function showModalWhatItemWasClicked(item) {
     return dispatch => {
         dispatch(showModal())
+        dispatch(hideAddButton())
         dispatch(whatItemWasClicked(item))
     }
 }
@@ -41,6 +43,12 @@ export function hideModal() {
         type: HIDE_MODAL
     }
 }
+
+export function hideAddButton(){
+    return {
+      type: HIDE_ADD_BUTTON,
+    }
+  }
 
 //get preview from Dropzone
 export function setPreview(preview) {

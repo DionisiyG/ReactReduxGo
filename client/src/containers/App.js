@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import ItemList from '../components/ItemList'
 import ModalWindow from '../components/ModalWindow'
 import * as actions from '../actions/actions'
-
-import axios from 'axios'
+//import axios from 'axios'
 
 
 class App extends Component {
@@ -25,11 +24,11 @@ class App extends Component {
         //     }))
     }
     render() {
-        let { items, showModal, hideModal, isShowing, removeItem, setItem, setPreview, preview, fetchData, itemClicked } = this.props
-         //console.log('Items in App', items)
+        let { items, showModal, hideModal, isShowing, removeItem, setItem, setPreview, preview, fetchData, itemClicked, addButtonIsShowing } = this.props
         return (
             <div className='content'>
-                <button className='btn' onClick={() => showModal()}>Click to ADD</button>
+                {/* <button className='btn' onClick={() => showModal()}>Click to ADD</button> */}
+                <button className={addButtonIsShowing.isShowing ? 'btn' : 'hideBtn'} onClick={() => showModal()}>Click to ADD</button>
                 <ItemList
                     items={items}
                     showModalPlusClicked={showModal}
@@ -52,7 +51,8 @@ const mapStateToProps = (state) => {
         items: state.operateWithItems,
         isShowing: state.modalWindows.isShowing,
         preview: state.preview.preview,
-        itemClicked: state.itemClicked
+        itemClicked: state.itemClicked,
+        addButtonIsShowing: state.hideAddButton
     }
 }
 const mapDispatchToProps = (dispatch) => {

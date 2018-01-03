@@ -9,7 +9,7 @@ class ItemList extends Component {
         let _items = items
         // console.log("Items",_items)
         return (
-            <div >
+            <div className='items'>
                 {_items.map((item) =>
                     <Item
                         key={item.Id}
