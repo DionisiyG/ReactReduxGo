@@ -74,8 +74,6 @@ export function operateWithItems(state = [], action) {
     }
 }
 
-
-
 export default combineReducers({
     modalWindows,
     operateWithItems,

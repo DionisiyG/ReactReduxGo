@@ -4,9 +4,6 @@ import thunkMiddleware from 'redux-thunk'
 import reducer from './reducers/reducers'
 import axios from 'axios'
 
-
-
-
 // let items = axios.get('http://localhost:3001/getAll')
 //   .then((response => {
 //     let items = response.data.ItemList
@@ -28,14 +25,11 @@ function getitems() {
       if (items === null) {
         items = []
       }
-  //  console.log('items-getitems()', items)
       return items
     }))
-  // console.log('test',test)
-  // return test
-  // console.log()
 }
-//console.log('getitems', getitems())
+
+
 
 const initialState = {
   modalWindows: { isShowing: false },

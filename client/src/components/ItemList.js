@@ -3,15 +3,11 @@ import Item from '../components/Item'
 
 class ItemList extends Component {
 
-   
+
     render() {
         let { items, showModalPlusClicked, deleteItem } = this.props
-        // let _items = []
-        // if(items.items != null){
-        //     _items = items.items
-        // }
-       let _items = items
-     // console.log("Items",_items)
+        let _items = items
+        // console.log("Items",_items)
         return (
             <div >
                 {_items.map((item) =>

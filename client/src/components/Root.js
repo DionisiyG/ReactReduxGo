@@ -4,9 +4,6 @@ import App from '../containers/App'
 import store from '../store'
 
 
-
-
-
 export default class Root extends Component {
   render() {
     return (

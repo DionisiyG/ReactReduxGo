@@ -12,9 +12,10 @@ const localhost = 'http://localhost:'
 const port = '3001'
 const getAllEndpoint = '/getAll'
 const addItemEndpoint = '/addItem'
+const deleteItenEndpoint = '/deleteItem?id='
 
 
-//modals
+//_______________Modals_______________________
 export function showModal() {
     return {
         type: SHOW_MODAL
@@ -40,6 +41,7 @@ export function hideModal() {
         type: HIDE_MODAL
     }
 }
+
 //get preview from Dropzone
 export function setPreview(preview) {
     return {
@@ -68,10 +70,7 @@ export function createItem(item) {
        // dispatch(itemsFetchAll())
         axios.post((localhost + port + addItemEndpoint), item)
             .then(response => {
-                //console.log(item)
                 let _item = JSON.parse(item)
-                //console.log(_item)
-                // dispatch(itemsFetchAll())
                 dispatch(addItem(_item))
                 dispatch(itemsFetchAll())
             })
@@ -98,7 +97,7 @@ export function itemsFetchAll(items) {
             }))
     };
 }
-//________________Deleting Item______________________
+//________________Delete Item______________________
 export function removeItem(id) {
     return {
         type: REMOVE_ITEM,
@@ -107,9 +106,9 @@ export function removeItem(id) {
 }
 export function deleteItem(id) {
     return dispatch => {
-        axios.delete(localhost + port + "/deleteItem?id=" + id)
+        axios.delete(localhost + port + deleteItenEndpoint + id)
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 dispatch(removeItem(id))
                 dispatch(itemsFetchAll())
             })

@@ -9,18 +9,6 @@ import axios from 'axios'
 
 class App extends Component {
 
-    // componentDidMount(){
-    //     var _this = this;
-    //     this.serverRequest = 
-    //       axios
-    //         .get("http://localhost:3001/getAll")
-    //         .then(function(result) {    
-    //           _this.setState({
-    //             items: result.data.items  
-    //           });
-    //         })
-    // }
-
     componentDidMount() {
         this.props.fetchData()
         // axios.get('http://localhost:3001/getAll')
@@ -38,10 +26,7 @@ class App extends Component {
     }
     render() {
         let { items, showModal, hideModal, isShowing, removeItem, setItem, setPreview, preview, fetchData, itemClicked } = this.props
-        
-         console.log('Items in App', items)
-       // console.log(this.state.fetchItems.fetchItems)
-        //console.log(this.state.fetchItems)
+         //console.log('Items in App', items)
         return (
             <div className='content'>
                 <button className='btn' onClick={() => showModal()}>Click to ADD</button>
@@ -64,10 +49,7 @@ class App extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        // items1: state.addRemoveItem.items,
-        // items3:state.fetchItems,
         items: state.operateWithItems,
-        // items2:state.getItems,
         isShowing: state.modalWindows.isShowing,
         preview: state.preview.preview,
         itemClicked: state.itemClicked
