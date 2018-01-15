@@ -25,6 +25,7 @@ class ModalWindow extends Component {
                 return  itemClicked.Rgt
             }
         }
+        
         let item = {
             desc: this.getDesc.value,
             src: this.props.preview,

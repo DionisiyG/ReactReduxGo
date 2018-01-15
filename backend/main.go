@@ -187,7 +187,7 @@ func updateKeys(items ItemList) ItemList {
 	return items
 }
 
-// RepoCreateItem : supportive funt to add newly added item to clice ItemList
+// RepoCreateItem : supportive func to add newly added item to slice ItemList
 func RepoCreateItem(item Item) Item {
 	items.ItemList = append(items.ItemList, item)
 	return item

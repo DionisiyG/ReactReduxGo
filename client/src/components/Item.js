@@ -2,25 +2,64 @@ import React, { Component } from 'react'
 
 class Item extends Component {
 
+
+
     render() {
-        let {  item, showModalPlusClicked, deleteItem } = this.props
+        let { item, showModalPlusClicked, deleteItem } = this.props
+        // if (item.Lft + 1 < item.Rgt) {
+        //     return (
+        //         <ul >
+        //             {item.Description &&
+        //                 <div className="item">
+        //                     <img src={item.Src} alt="" />
+        //                     {"Description: " + item.Description}
+        //                     <div className="buttons">
+        //                         <button className="addBtn btn" onClick={(id) => showModalPlusClicked(item)}>+</button>
+        //                         <button className="removeBtn btn" onClick={(id) => deleteItem(item.Id)}>-</button>
+        //                     </div>
+        //                     <p>lKey is {item.Lft} <span>|||| rKey is {item.Rgt}</span></p>
+        //                     <p>______________________</p>
+        //                     <p>id is {item.Id}</p>
+        //                 </div>
+        //             }
+        //         </ul>
+        //     )
+        // }
+
         return (
             <div className="item">
-                {item.Description &&
-                    <div>
-                        <img src={item.Src} alt="" />
-                        {"Description: " + item.Description}
-                        <div className="buttons">
-                            <button className="addBtn btn" onClick={(id) => showModalPlusClicked(item)}>+</button>
-                            <button className="removeBtn btn" onClick={(id) => deleteItem(item.Id)}>-</button>
-                        </div>
-                        <p>lKey is {item.Lft} <span>|||| rKey is {item.Rgt}</span></p> 
-                        <p>______________________</p>
-                        <p>id is {item.Id}</p>
-                    </div>
-                }
+                <img src={item.Src} alt="" />
+                {"Description: " + item.Description}
+                <div className="buttons">
+                    <button className="addBtn btn" onClick={(id) => showModalPlusClicked(item)}>+</button>
+                    <button className="removeBtn btn" onClick={(id) => deleteItem(item.Id)}>-</button>
+                </div>
+                <p>lKey is {item.Lft} <span>|||| rKey is {item.Rgt}</span></p>
+                <p>______________________</p>
+                <p>id is {item.Id}</p>
             </div>
+
         )
+
+
+        // return (
+        //     <li >
+        //         {item.Description &&
+        //             <div className="item">
+        //                 <img src={item.Src} alt="" />
+        //                 {"Description: " + item.Description}
+        //                 <div className="buttons">
+        //                     <button className="addBtn btn" onClick={(id) => showModalPlusClicked(item)}>+</button>
+        //                     <button className="removeBtn btn" onClick={(id) => deleteItem(item.Id)}>-</button>
+        //                 </div>
+        //                 <p>lKey is {item.Lft} <span>|||| rKey is {item.Rgt}</span></p>
+        //                 <p>______________________</p>
+        //                 <p>id is {item.Id}</p>
+        //             </div>
+        //         }
+        //     </li>
+
+        // )
     }
 }
 

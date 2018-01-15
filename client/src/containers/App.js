@@ -10,6 +10,7 @@ class App extends Component {
 
     componentDidMount() {
         this.props.fetchData()
+        
         // axios.get('http://localhost:3001/getAll')
         //     .then((response => {
         //         let itemsss = response.data.ItemList
