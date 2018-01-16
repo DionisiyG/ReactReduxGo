@@ -20,6 +20,7 @@ Open one instance of terminal "your_path/client" and type:
 npm install
 npm run
 
+
 Open another instance of terminal "your_path/backend" and type:
 go run main.go
-If you see message "I am working 
+If you see message "I am working" in your console - server is working ;)
