@@ -10,6 +10,7 @@ class ModalWindow extends Component {
     
     getItem(e) {
         let itemClicked = this.props.itemClicked
+       
         let itemRgt = () => {
             if (Object.keys(itemClicked).length === 0 ) {
                 return 1

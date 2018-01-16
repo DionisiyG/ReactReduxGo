@@ -3,6 +3,11 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 .modal-backdrop {
   position: fixed;
@@ -53,11 +58,14 @@ body {
 }
 
 .btn {
-  padding: 10px;
+  padding: 3%;
   border: 1px solid gray;
-  min-width: 35px;
+  /* min-width: 35px; */
   border-radius: 5px;
   margin-right: 10px;
+}
+.btn:hover{
+  cursor: pointer;
 }
 .item {
   font-size: 15px;
@@ -67,11 +75,17 @@ body {
   width:45%;
   position: relative;
   text-align: center;
- display: inline-block;
-  margin-left: 15px;
+  display: inline-block;
   vertical-align: top;
   /* width: 300px;
   margin: 0 auto 15px auto; */
+}
+.item:not(:first-child){
+  margin-left: 15px;
+}
+.item-div{
+  width: 50%;
+  margin: 0 auto;
 }
 .item img{
   width: 100%;

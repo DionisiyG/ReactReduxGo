@@ -12,9 +12,10 @@ class App extends Component {
     render() {
         let { items, showModal, hideModal, isShowing, removeItem, setItem, setPreview, preview, fetchData, itemClicked, addButtonIsShowing } = this.props
         return (
-            <div className='content'>
-                {/* <button className='btn' onClick={() => showModal()}>Click to ADD</button> */}
-                <button className={addButtonIsShowing.isShowing ? 'btn' : 'hideBtn'} onClick={() => showModal()}>Click to ADD</button>
+            <div className='content'>  
+                {/* {items.length === 0 && 
+                 <button className='btn' onClick={() => showModal()}>Click to ADD</button> } */}
+                 <button className={addButtonIsShowing.isShowing ? 'btn' : 'hideBtn'} onClick={() => showModal()}>Click to ADD</button>
                 <ItemList
                     items={items}
                     showModalPlusClicked={showModal}

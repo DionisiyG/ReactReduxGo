@@ -23,7 +23,7 @@ class Item extends Component {
         }
 
         const singleItem =
-            <div>
+            <div className="item-div">
                 <img src={node.Src} alt="" />
                 {"Description: " + node.Description}
                 <div className="buttons">

@@ -17,8 +17,6 @@ class ItemList extends Component {
             leftAttribute: 'Lft',
             rightAttribute: 'Rgt'
         })
-        console.log(result)
-
 
         let nodes = result.map((item) =>
             <Item
