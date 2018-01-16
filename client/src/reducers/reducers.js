@@ -44,6 +44,52 @@ let initItems = {
         // }
     ]
 }
+let items1 = [
+    {
+        Src: "https://goo.gl/owfXuz",
+        Description: "initial description",
+        Id: 1,
+        Lft:0,
+        Rgt:9,
+        Children: [
+            {
+                Src: "https://goo.gl/owfXuz",
+                Description: "initial description2",
+                Id: 2,
+                Lft:1,
+                Rgt:2,
+                Children: []
+            },
+            {
+                Src: "https://goo.gl/owfXuz",
+                Description: "initial description",
+                Id: 3,
+                Lft:3,
+                Rgt:8,
+                Children: [
+                    {
+                        Src: "https://goo.gl/owfXuz",
+                        Description: "initial description2",
+                        Id: 4,
+                        Lft:4,
+                        Rgt:5,
+                        Children: []
+                    },
+                    {
+                        Src: "https://goo.gl/owfXuz",
+                        Description: "initial description2",
+                        Id: 5,
+                        Lft:6,
+                        Rgt:7,
+                        Children: []
+                    }
+                ]
+            }
+            
+        ]
+    }
+    
+]
 
 //get ID of item on which '+' was clicked
 export function itemClicked(state = {}, action) {

@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import Item from '../components/Item'
+const converter = require('ns2js');
 
 class ItemList extends Component {
-
-
-
 
     renderItemsBackup(items) {
         // find where to render
@@ -90,21 +88,21 @@ class ItemList extends Component {
 
     render() {
         let { items, showModalPlusClicked, deleteItem } = this.props
-        //  let _items = items
-        // console.log("Items",_items)
-
-        let arr = []
-
+       
         //sort items by Lft
         let _items = items.sort(function (a, b) {
             return a.Lft - b.Lft;
         });
 
-        function showItems() {
-            _items.filter(filterChildren)
-            function filterChildren(item){
+        
+        
+        let result = converter(_items, {
+            leftAttribute: 'Lft',
+            rightAttribute: 'Rgt'
+        })
+        console.log(result)
 
-            }
+        function showItems() {
             const iitems = _items.map(item => {
                 const itemToDisplay =
                     <Item
@@ -124,6 +122,7 @@ class ItemList extends Component {
                     </li>
                 )
             })
+
             return (
                 <ul className="itemsUl">
                     {iitems}
@@ -132,8 +131,23 @@ class ItemList extends Component {
 
         }
 
+        let nodes = result.map((item) =>
+            <Item
+                // item={item}
+                src={item.Src}
+                desc={item.description}
+                lft={item.lft}
+                rgt={item.rgt}
+                showModalPlusClicked={showModalPlusClicked}
+                deleteItem={deleteItem}
+                children={item.children}
+                node = {item}
+            />
+        )
         return (
-            showItems(items)
+            //showItems(items)
+            <ul>{nodes}</ul>
+            
         )
     }
 }
@@ -192,8 +206,45 @@ class ItemList extends Component {
 //     </div>
 // )
 
+// let arr = [
+//     {
+//        Src: "https://goo.gl/owfXuz",
+//        Description: "initial description",
+//        Id:1,
+//        lft:0,
+//        rgt:9
+//    },
+//    {
+//        Src: "https://goo.gl/owfXuz",
+//        Description: "initial description2",
+//        Id: 2,
+//        lft:1,
+//        rgt:2
+//    },
+//    {
+//        Src: "https://goo.gl/owfXuz",
+//        Description: "initial description2",
+//        Id: 3,
+//        lft:3,
+//        rgt:8
+//    },
+//    {
+//        Src: "https://goo.gl/owfXuz",
+//        Description: "initial description2",
+//        Id: 4,
+//        lft:4,
+//        rgt:5
+//    }
+//    , {
+//        Src: "https://goo.gl/owfXuz",
+//        Description: "initial description2",
+//        Id: 5,
+//        lft:6,
+//        rgt:7
+//    }
+//    ]
 
 
 
-export default ItemList
+    export default ItemList
 

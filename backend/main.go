@@ -46,13 +46,32 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b, err := json.Marshal(getAllItems())
+	_items := getAllItems()
+	//makeTree(_items)
+
+	b, err := json.Marshal(_items)
 	checkErr(err)
 
 	enableCors(&w)
-	//json.NewEncoder(w).Encode(items.ItemList)
 	w.Write(b)
 }
+
+// func makeTree(items ItemList, lft , rgt ) ItemList{
+
+// 	for  i := range items.ItemList{
+// 		//item := itemms.ItemList[i]
+// 		if items.ItemList[i].Lft + 1 < items.ItemList[i].Rgt{
+// 			items.ItemList[i].Children =  append(items.ItemList[i].Children, items.ItemList[i].Id)
+// 		}	
+// 	}
+// 	var array []ItemList
+// 	for i := range items.ItemList{
+// 		if
+// 	}
+
+// 	fmt.Println(items) 
+// 	return items
+// }
 
 func addItem(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
@@ -140,6 +159,8 @@ func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Content-Type", "application/json")
 }
 
+
+
 func getAllItems() ItemList {
 	rows, err := db.Query("SELECT * FROM new_table ORDER BY id")
 	checkErr(err)
@@ -158,9 +179,9 @@ func getAllItems() ItemList {
 
 		items.ItemList = append(items.ItemList, Item{Id: id, Description: description, Src: src, Lft: lft, Rgt: rgt})
 	}
-	// if len(items.ItemList) == 0 {
-	// 	db.Exec("INSERT INTO new_table VALUES(1, asd, https://goo.gl/owfXuz, 0, 1)")
-	// }
+
+
+	
 	return items
 }
 
