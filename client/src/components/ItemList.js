@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Item from '../components/Item'
-const converter = require('ns2js');
+import Converter from 'ns2js'
 
 class ItemList extends Component {
 
@@ -13,7 +13,7 @@ class ItemList extends Component {
         });
         
         //convert flat array to nested array
-        let result = converter(_items, {
+        let result = Converter(_items, {
             leftAttribute: 'Lft',
             rightAttribute: 'Rgt'
         })
@@ -30,6 +30,7 @@ class ItemList extends Component {
                 deleteItem={deleteItem}
                 children={item.children}
                 node = {item}
+                key={item.Id}
             />
         )
         return (
