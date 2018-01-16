@@ -23,18 +23,18 @@ export function showModal() {
     }
 }
 
+export function whatItemWasClicked(item) {
+    return {
+        type: 'ITEM_CLICKED',
+        item
+    }
+}
+
 export function showModalWhatItemWasClicked(item) {
     return dispatch => {
         dispatch(showModal())
         dispatch(hideAddButton())
         dispatch(whatItemWasClicked(item))
-    }
-}
-
-export function whatItemWasClicked(item) {
-    return {
-        type: 'ITEM_CLICKED',
-        item
     }
 }
 
@@ -50,8 +50,10 @@ export function hideAddButton(){
     }
   }
 
-//get preview from Dropzone
-export function setPreview(preview) {
+
+  //get preview from Dropzone
+
+  export function setPreview(preview) {
     return {
         type: SET_PREVIEW,
         preview
@@ -69,13 +71,11 @@ export function addItem(item) {
 export function createItem(item) {
     item = JSON.stringify({
         Description: item.desc,
-        // Src: item.src.replace("blob:", "")
         Src: item.src,
         Lft: item.lft,
         Rgt: item.rgt
     })
     return (dispatch) => {
-       // dispatch(itemsFetchAll())
         axios.post((localhost + port + addItemEndpoint), item)
             .then(response => {
                 let _item = JSON.parse(item)
@@ -85,6 +85,7 @@ export function createItem(item) {
         dispatch(hideModal())
     }
 }
+
 //__________________Fetch all items from server_________________________
 export function itemsFetchData(items) {
     return {
@@ -122,14 +123,3 @@ export function deleteItem(id) {
             })
     }
 }
-
-// export function addItem(description, src, lft, rgt) {
-//     return {
-//         type: ADD_ITEM,
-//         id: nextId++,
-//         description: description,
-//         src,
-//         lft,
-//         rgt
-//     }
-// }

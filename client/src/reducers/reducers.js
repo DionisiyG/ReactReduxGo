@@ -26,25 +26,6 @@ function modalWindows(state = {}, action) {
     }
 }
 
-let initItems = {
-    items: [
-        // {
-        //     Src: "https://goo.gl/owfXuz",
-        //     Description: "initial description",
-        //     Id: 0,
-        //     Lft:0,
-        //     Rgt:3
-        // },
-        // {
-        //     Src: "https://goo.gl/owfXuz",
-        //     Description: "initial description2",
-        //     Id: 1,
-        //     Lft:1,
-        //     Rgt:2
-        // }
-    ]
-}
-
 //get ID of item on which '+' was clicked
 export function itemClicked(state = {}, action) {
     switch (action.type) {
@@ -61,10 +42,6 @@ export function operateWithItems(state = [], action) {
     switch (action.type) {
         case FETCH_ITEMS:
             return action.items
-        // return [ ...state , action.items]
-        //   return Object.assign({}, state, {
-        //     items: action.items
-        // })
         case ADD_ITEM:
             return [...state, action.item]
         case REMOVE_ITEM:
@@ -92,30 +69,3 @@ export default combineReducers({
     itemClicked,
     hideAddButton
 })
-
-// function addRemoveItem(state = initItems, action) {
-//     switch (action.type) {
-//         // case ADD_ITEM:
-//         //     return Object.assign({}, state, {
-//         //         items: [
-//         //             ...state.items,
-//         //             {
-//         //                 id: action.id,
-//         //                 src: action.src,
-//         //                 description: action.description,
-//         //                 lft: action.lft,
-//         //                 rgt: action.rgt
-//         //             }
-//         //         ]
-//         //     })
-//         // case ADD_ITEM:
-//         //     return [...state, action.item]
-//         // case REMOVE_ITEM:
-//         //     return {
-//         //         ...state,
-//         //         items: state.items.filter(item => item.id !== action.id)
-//         //     }
-//         default:
-//             return state
-//     }
-// }

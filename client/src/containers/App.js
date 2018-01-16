@@ -3,26 +3,11 @@ import { connect } from 'react-redux'
 import ItemList from '../components/ItemList'
 import ModalWindow from '../components/ModalWindow'
 import * as actions from '../actions/actions'
-//import axios from 'axios'
-
 
 class App extends Component {
 
     componentDidMount() {
         this.props.fetchData()
-        
-        // axios.get('http://localhost:3001/getAll')
-        //     .then((response => {
-        //         let itemsss = response.data.ItemList
-        //         if (itemsss === null) {
-        //             itemsss = []
-        //         }
-        //         this.setState({
-        //             fetchItems: itemsss
-        //         })
-        //         // return items
-        //          console.log('preloaded state', itemsss)
-        //     }))
     }
     render() {
         let { items, showModal, hideModal, isShowing, removeItem, setItem, setPreview, preview, fetchData, itemClicked, addButtonIsShowing } = this.props

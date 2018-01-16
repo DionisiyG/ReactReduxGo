@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -46,11 +45,12 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b, err := json.Marshal(getAllItems())
+	_items := getAllItems()
+
+	b, err := json.Marshal(_items)
 	checkErr(err)
 
 	enableCors(&w)
-	//json.NewEncoder(w).Encode(items.ItemList)
 	w.Write(b)
 }
 
@@ -105,7 +105,6 @@ func deleteItem(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		if item.Lft == lftToDel && item.Rgt == rgtToDel {
-			//fmt.Println("This is item to delete", item)
 			_, errSib := db.Exec("DELETE FROM new_table WHERE lft >= ? AND rgt <= ?", itemtoDel.Lft, itemtoDel.Rgt)
 			checkErr(errSib)
 			_, err := db.Exec("DELETE FROM new_table WHERE id=?", item.Id)
@@ -119,12 +118,6 @@ func deleteItem(w http.ResponseWriter, r *http.Request) {
 			db.Exec("UPDATE new_table SET lft = lft - (? - ? + 1) WHERE id = ?", rgtToDel, lftToDel, item.Id)
 		}
 	}
-
-	//fmt.Println("to delete", itemtoDel)
-	//_, err := db.Exec("DELETE FROM new_table WHERE id=?", nId)
-	//checkErr(err)
-
-	//fmt.Fprintf(w, "Item %s deleted. \n", nId)
 }
 
 // Support functions
@@ -158,9 +151,7 @@ func getAllItems() ItemList {
 
 		items.ItemList = append(items.ItemList, Item{Id: id, Description: description, Src: src, Lft: lft, Rgt: rgt})
 	}
-	// if len(items.ItemList) == 0 {
-	// 	db.Exec("INSERT INTO new_table VALUES(1, asd, https://goo.gl/owfXuz, 0, 1)")
-	// }
+
 	return items
 }
 
@@ -168,12 +159,10 @@ func updateKeys(items ItemList) ItemList {
 	var lastItem = items.ItemList[len(items.ItemList)-1]
 	var lastItemLKey = lastItem.Lft
 	var lastItemRKey = lastItem.Rgt
-	//fmt.Println("Last item of a slice is:", lastItem, "Lkey is", lastItemLKey, "Rkey is", lastItemRKey)
 
 	if len(items.ItemList) > 1 {
 		for _, item := range items.ItemList {
 			if item.Lft == lastItemLKey && item.Rgt == lastItemRKey {
-				//fmt.Println("This is added item")
 				break
 			}
 			if item.Lft >= lastItemLKey {
@@ -198,10 +187,8 @@ func findItemToDelete(id int) Item {
 	var itemToDelete Item
 	for _, item := range items.ItemList {
 		if item.Id == id {
-			//fmt.Println("to delete", item)
 			itemToDelete = item
 		}
 	}
-	//fmt.Println("to delete", itemToDelete)
 	return itemToDelete
 }

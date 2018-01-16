@@ -7,6 +7,7 @@ class ModalWindow extends Component {
     handleDrop([{ preview }]) {
         this.props.setPreview(preview)
     }
+    
     getItem(e) {
         let itemClicked = this.props.itemClicked
         let itemRgt = () => {
@@ -29,15 +30,10 @@ class ModalWindow extends Component {
         let item = {
             desc: this.getDesc.value,
             src: this.props.preview,
-            // lft: itemClicked.Rgt,
-            // rgt: itemClicked.Rgt + 1
             lft: itemLft(),
             rgt: itemRgt()
           
         }
-        // let desc = this.getDesc.value
-        // // let src = this.getImgSrc.currentSrc
-        // let src = this.props.preview
         this.props.onOkClicked(item)
     }
 
