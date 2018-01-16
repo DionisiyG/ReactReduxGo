@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -47,7 +46,6 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 	}
 
 	_items := getAllItems()
-	//makeTree(_items)
 
 	b, err := json.Marshal(_items)
 	checkErr(err)
@@ -55,23 +53,6 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	w.Write(b)
 }
-
-// func makeTree(items ItemList, lft , rgt ) ItemList{
-
-// 	for  i := range items.ItemList{
-// 		//item := itemms.ItemList[i]
-// 		if items.ItemList[i].Lft + 1 < items.ItemList[i].Rgt{
-// 			items.ItemList[i].Children =  append(items.ItemList[i].Children, items.ItemList[i].Id)
-// 		}	
-// 	}
-// 	var array []ItemList
-// 	for i := range items.ItemList{
-// 		if
-// 	}
-
-// 	fmt.Println(items) 
-// 	return items
-// }
 
 func addItem(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
@@ -124,7 +105,6 @@ func deleteItem(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		if item.Lft == lftToDel && item.Rgt == rgtToDel {
-			//fmt.Println("This is item to delete", item)
 			_, errSib := db.Exec("DELETE FROM new_table WHERE lft >= ? AND rgt <= ?", itemtoDel.Lft, itemtoDel.Rgt)
 			checkErr(errSib)
 			_, err := db.Exec("DELETE FROM new_table WHERE id=?", item.Id)
@@ -138,12 +118,6 @@ func deleteItem(w http.ResponseWriter, r *http.Request) {
 			db.Exec("UPDATE new_table SET lft = lft - (? - ? + 1) WHERE id = ?", rgtToDel, lftToDel, item.Id)
 		}
 	}
-
-	//fmt.Println("to delete", itemtoDel)
-	//_, err := db.Exec("DELETE FROM new_table WHERE id=?", nId)
-	//checkErr(err)
-
-	//fmt.Fprintf(w, "Item %s deleted. \n", nId)
 }
 
 // Support functions
@@ -158,8 +132,6 @@ func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Methods", "*")
 	(*w).Header().Set("Content-Type", "application/json")
 }
-
-
 
 func getAllItems() ItemList {
 	rows, err := db.Query("SELECT * FROM new_table ORDER BY id")
@@ -180,8 +152,6 @@ func getAllItems() ItemList {
 		items.ItemList = append(items.ItemList, Item{Id: id, Description: description, Src: src, Lft: lft, Rgt: rgt})
 	}
 
-
-	
 	return items
 }
 
@@ -189,12 +159,10 @@ func updateKeys(items ItemList) ItemList {
 	var lastItem = items.ItemList[len(items.ItemList)-1]
 	var lastItemLKey = lastItem.Lft
 	var lastItemRKey = lastItem.Rgt
-	//fmt.Println("Last item of a slice is:", lastItem, "Lkey is", lastItemLKey, "Rkey is", lastItemRKey)
 
 	if len(items.ItemList) > 1 {
 		for _, item := range items.ItemList {
 			if item.Lft == lastItemLKey && item.Rgt == lastItemRKey {
-				//fmt.Println("This is added item")
 				break
 			}
 			if item.Lft >= lastItemLKey {
@@ -219,10 +187,8 @@ func findItemToDelete(id int) Item {
 	var itemToDelete Item
 	for _, item := range items.ItemList {
 		if item.Id == id {
-			//fmt.Println("to delete", item)
 			itemToDelete = item
 		}
 	}
-	//fmt.Println("to delete", itemToDelete)
 	return itemToDelete
 }

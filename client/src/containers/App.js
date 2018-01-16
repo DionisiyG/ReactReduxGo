@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import ItemList from '../components/ItemList'
 import ModalWindow from '../components/ModalWindow'
 import * as actions from '../actions/actions'
-//import axios from 'axios'
-
 
 class App extends Component {
 

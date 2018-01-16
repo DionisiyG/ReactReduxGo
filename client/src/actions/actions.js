@@ -38,7 +38,6 @@ export function showModalWhatItemWasClicked(item) {
     }
 }
 
-
 export function hideModal() {
     return {
         type: HIDE_MODAL
@@ -53,7 +52,8 @@ export function hideAddButton(){
 
 
   //get preview from Dropzone
-export function setPreview(preview) {
+
+  export function setPreview(preview) {
     return {
         type: SET_PREVIEW,
         preview
@@ -71,7 +71,6 @@ export function addItem(item) {
 export function createItem(item) {
     item = JSON.stringify({
         Description: item.desc,
-        // Src: item.src.replace("blob:", "")
         Src: item.src,
         Lft: item.lft,
         Rgt: item.rgt

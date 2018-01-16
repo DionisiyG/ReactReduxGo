@@ -26,24 +26,6 @@ function modalWindows(state = {}, action) {
     }
 }
 
-let initItems = {
-    items: [
-        // {
-        //     Src: "https://goo.gl/owfXuz",
-        //     Description: "initial description",
-        //     Id: 0,
-        //     Lft:0,
-        //     Rgt:3
-        // },
-        // {
-        //     Src: "https://goo.gl/owfXuz",
-        //     Description: "initial description2",
-        //     Id: 1,
-        //     Lft:1,
-        //     Rgt:2
-        // }
-    ]
-}
 let items1 = [
     {
         Src: "https://goo.gl/owfXuz",
